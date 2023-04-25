@@ -1,15 +1,5 @@
 ## Steps 
-Sure, here's a simple checklist to accomplish your goal of deploying a machine learning model from Hugging Face on a cloud provider using a virtual machine provided by your university, without using Docker and using FastAPI for the API:
-1.	[x] Select a cloud provider: Choose a cloud provider that is supported by your university and meets your requirements.
-2.	[x] Create a VM: Create a VM that meets the specifications required to run your machine learning model.
-3.	[x] Install necessary software: Install the necessary software for running your machine learning model on your VM, including Python and any required libraries.
-4.	[ ] Download and prepare the model: Download the pre-trained machine learning model that you want to deploy from Hugging Face's model hub and prepare it for deployment.
-5.	[ ] Install FastAPI: Install the FastAPI framework for building the API.
-6.	[ ] Create the API: Build an API using FastAPI that can receive input data and return predictions from your pre-trained machine learning model.
-7.	[ ] Test the API: Test the API by sending sample data to it and verifying that it returns accurate predictions.
-8.	[ ] Deploy the API: Deploy the API to your cloud provider using a service such as AWS Elastic Beanstalk or GCP App Engine.
-9.	[ ] Secure the API: Implement security measures such as SSL encryption and authentication to protect your API from unauthorized access.
-10.	[ ] Monitor the API: Monitor the API for performance and errors using tools such as Amazon CloudWatch or GCP Stackdriver to ensure that your machine learning model is running smoothly and providing accurate predictions.
+
 
 ## Deploying in VM
 1. Get VM
