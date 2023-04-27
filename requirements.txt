@@ -2,8 +2,8 @@ fastapi==0.70.0
 uvicorn==0.17.6
 requests==2.26.0
 scikit-learn==1.0.1
-transformers
+transformers==4.28.1
 torch
-tensorflow
+tensorflow==2.5.0
 tensorflow-cpu==2.5.0
 keras==2.6.0
