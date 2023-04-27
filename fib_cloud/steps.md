@@ -1,3 +1,7 @@
+## Files
+- setenv.sh
+  - Set environment in bash terminal before installing requirements.txt
+
 ## Steps 
 
 
