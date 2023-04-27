@@ -9,7 +9,10 @@ from typing import Dict, List
 
 from fastapi import FastAPI, Request
 
-from app.schemas import IrisType, PredictPayload
+from app.schemas import IrisType, PredictPayload, PredictBert
+
+from transformers import pipeline
+
 
 MODELS_DIR = Path("models/")
 NAME_APP = "deploy-GAISSA"
@@ -61,6 +64,7 @@ def _load_models():
             model_wrapper = pickle.load(file)
             model_wrappers_list.append(model_wrapper)
 
+    
 
 @app.get("/", tags=["General"])  # path operation decorator
 @construct_response
@@ -75,7 +79,7 @@ def _index(request: Request):
     return response
 
 
-@app.get("/models", tags=["Prediction"])
+@app.get("/models", tags=["Pickle Models"])
 @construct_response
 def _get_models_list(request: Request):
     """Return the lsit of available models"""
@@ -98,7 +102,7 @@ def _get_models_list(request: Request):
     return response
 
 
-@app.post("/models/{type}", tags=["Prediction"])
+@app.post("/models/{type}", tags=["Pickle Models"])
 @construct_response
 def _predict(request: Request, type: str, payload: PredictPayload):
     """Classifies Iris flowers based on sepal and petal sizes."""
@@ -135,6 +139,55 @@ def _predict(request: Request, type: str, payload: PredictPayload):
                 },
                 "prediction": prediction,
                 "predicted_type": predicted_type,
+            },
+        }
+    else:
+        response = {
+            "message": "Model not found",
+            "status-code": HTTPStatus.BAD_REQUEST,
+        }
+    return response
+
+@app.post("/huggingface_models/bert", tags=["Hugging Face Models"])
+@construct_response
+def _predict_bert(request: Request, payload: PredictBert):
+    """bert-base-uncased model."""
+
+    # sklearn's `predict()` methods expect a 2D array of shape [n_samples, n_features]
+    # therefore, we need to convert our single data point into a 2D array
+    # features = [
+    #     [
+    #         payload.sepal_length,
+    #         payload.sepal_width,
+    #         payload.petal_length,
+    #         payload.petal_width,
+    #     ]
+    # ]
+    
+    input_text = payload.input_text 
+    print("Input text")
+    print(input_text)
+    #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+    if input_text:
+
+        # prediction = model_wrapper["model"].predict(features)
+        # prediction = int(prediction[0])
+        # predicted_type = IrisType(prediction).name
+
+        unmasker = pipeline('fill-mask', model='./bert-model')
+        output = unmasker(input_text)
+        print(output)
+        
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                #"model-type": model_wrapper["type"],
+                "model-type": "BERT",
+                "input_text": input_text,
+                "prediction": output,
+                #"predicted_type": predicted_type,
             },
         }
     else:

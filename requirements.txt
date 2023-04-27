@@ -1,5 +1,9 @@
-fastapi==0.78.0
+fastapi==0.70.0
 uvicorn==0.17.6
-requests
-config
+requests==2.26.0
 scikit-learn==1.0.1
+transformers
+torch
+tensorflow
+tensorflow-cpu==2.5.0
+keras==2.6.0

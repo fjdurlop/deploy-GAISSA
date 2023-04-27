@@ -22,6 +22,15 @@ class PredictPayload(BaseModel):
             }
         }
 
+class PredictBert(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "He is working as [MASK] in the university",
+            }
+        }
 
 class IrisType(Enum):
     setosa = 0
