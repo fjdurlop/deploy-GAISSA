@@ -31,4 +31,18 @@ https://discuss.huggingface.co/t/how-to-save-my-model-to-use-it-later/20568
 
 Errors
     if No model found in config file.
-        Yo only have the weights 
+        You only have the weights 
+
+
+## Steps to run API
+1. Run server
+   1. uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir deploy-GAISSA --reload-dir app   
+2. go to http://127.0.0.1:8000/docs
+3. Use huggingface_model
+
+
+## Pretrained models from HuggingFace
+
+- What can be imported in old cpu
+  - from transformers import TFBertTokenizer
+  - 

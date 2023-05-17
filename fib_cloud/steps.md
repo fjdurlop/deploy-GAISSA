@@ -88,5 +88,20 @@ Create SSH tunnel to access endpoints, forwards traffic from my local port XXXX 
 
 ```
 ssh -L 8080:localhost:8080 myusername@123.45.67.89
-ssh -L 5000:localhost:5000  alumne@10.4.41.62
+ssh -L 8000:localhost:8000  alumne@10.4.41.62
 ```
+
+## Steps
+- Open visual studio
+- Start server (uvicorn)
+  - uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir deploy-GAISSA --reload-dir app 
+- Ssh tunnel
+- Calls from local machine
+	• Open swagger
+	• Open a terminal with git bash
+Git Bash is a command line terminal emulator for Windows. 
+
+
+## Errors in Virtech
+- Not able to load pipeline
+  - from transformers import pipeline 
