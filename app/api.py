@@ -1,4 +1,31 @@
-"""Main script: it includes our API initialization and endpoints."""
+"""Main script: it includes our API initialization and endpoints.
+
+Problems 
+
+>>> from transformers import pipeline
+>>> import tensorflow
+Illegal instruction (core dumped)
+
+In brief, the error will be thrown if we’re running recent TensorFlow binaries on CPU(s) 
+that do not support Advanced Vector Extensions (AVX), an instruction set that enables faster
+computation especially for vector operations. Starting from TensorFlow 1.6, pre-built
+TensorFlow binaries use AVX instructions. An excerpt from TensorFlow 1.6 release announcement: 
+tf 1.6 - feb 18
+transformers - 19
+https://tech.amikelive.com/node-887/how-to-resolve-error-illegal-instruction-core-dumped-when-running-import-tensorflow-in-a-python-program/
+
+flags           : fpu de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pse36 clflush mmx fxsr sse sse2 syscall nx lm rep_good nopl xtopology cpuid tsc_known_freq pni cx16 x2apic hypervisor lahf_lm cpuid_fault pti
+
+CPU features
+    windows
+        check system information, then search {cpu model} CPU features
+    linux
+        more /proc/cpuinfo | grep flags
+        
+This repository is tested on Python 3.6+, Flax 0.3.2+, PyTorch 1.3.1+ and TensorFlow 2.3+.
+
+
+"""
 
 import pickle
 from datetime import datetime
@@ -10,9 +37,13 @@ from typing import Dict, List
 from fastapi import FastAPI, Request
 
 from app.schemas import IrisType, PredictPayload, PredictBert
+print("point1")
+#from transformers import pipeline
+print("point2")
 
-from transformers import pipeline
-
+# Local modules
+from app.models import LMBERTModel, Model
+print("p3")
 
 MODELS_DIR = Path("models/")
 NAME_APP = "deploy-GAISSA"
@@ -148,45 +179,31 @@ def _predict(request: Request, type: str, payload: PredictPayload):
         }
     return response
 
+
 @app.post("/huggingface_models/bert", tags=["Hugging Face Models"])
 @construct_response
 def _predict_bert(request: Request, payload: PredictBert):
     """bert-base-uncased model."""
-
-    # sklearn's `predict()` methods expect a 2D array of shape [n_samples, n_features]
-    # therefore, we need to convert our single data point into a 2D array
-    # features = [
-    #     [
-    #         payload.sepal_length,
-    #         payload.sepal_width,
-    #         payload.petal_length,
-    #         payload.petal_width,
-    #     ]
-    # ]
     
     input_text = payload.input_text 
     print("Input text")
     print(input_text)
     #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
 
+    model = LMBERTModel()
+    print(f"Model: {model.name}")
+
     if input_text:
-
-        # prediction = model_wrapper["model"].predict(features)
-        # prediction = int(prediction[0])
-        # predicted_type = IrisType(prediction).name
-
-        unmasker = pipeline('fill-mask', model='./bert-model')
-        output = unmasker(input_text)
-        print(output)
+        prediction = model.predict(input_text)
         
         response = {
             "message": HTTPStatus.OK.phrase,
             "status-code": HTTPStatus.OK,
             "data": {
                 #"model-type": model_wrapper["type"],
-                "model-type": "BERT",
+                "model-type": model.name,
                 "input_text": input_text,
-                "prediction": output,
+                "prediction": prediction,
                 #"predicted_type": predicted_type,
             },
         }
@@ -196,3 +213,53 @@ def _predict_bert(request: Request, payload: PredictBert):
             "status-code": HTTPStatus.BAD_REQUEST,
         }
     return response
+
+
+# @app.post("/huggingface_models/bert", tags=["Hugging Face Models"])
+# @construct_response
+# def _predict_bert(request: Request, payload: PredictBert):
+#     """bert-base-uncased model."""
+
+#     # sklearn's `predict()` methods expect a 2D array of shape [n_samples, n_features]
+#     # therefore, we need to convert our single data point into a 2D array
+#     # features = [
+#     #     [
+#     #         payload.sepal_length,
+#     #         payload.sepal_width,
+#     #         payload.petal_length,
+#     #         payload.petal_width,
+#     #     ]
+#     # ]
+    
+#     input_text = payload.input_text 
+#     print("Input text")
+#     print(input_text)
+#     #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+#     if input_text:
+
+#         # prediction = model_wrapper["model"].predict(features)
+#         # prediction = int(prediction[0])
+#         # predicted_type = IrisType(prediction).name
+
+#         unmasker = pipeline('fill-mask', model='./bert-base-uncased')
+#         output = unmasker(input_text)
+#         print(output)
+        
+#         response = {
+#             "message": HTTPStatus.OK.phrase,
+#             "status-code": HTTPStatus.OK,
+#             "data": {
+#                 #"model-type": model_wrapper["type"],
+#                 "model-type": "BERT",
+#                 "input_text": input_text,
+#                 "prediction": output,
+#                 #"predicted_type": predicted_type,
+#             },
+#         }
+#     else:
+#         response = {
+#             "message": "Model not found",
+#             "status-code": HTTPStatus.BAD_REQUEST,
+#         }
+#     return response
