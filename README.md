@@ -13,6 +13,7 @@
 ### NLP
 - BERT
   - Link: https://huggingface.co/bert-base-uncased
+  - git clone https://huggingface.co/bert-base-uncased
 
 - T5
   - Link: https://huggingface.co/t5-base
@@ -34,8 +35,23 @@
 - h5, weights only
 - Pickle
 
+## ML task
+- CV
+- NLP
+- ...
+
+## Roles
+Role: ML Engineer
+
+- Data engineer: Manage DBs
+- Data scientist: Train ML models
+- BI: Dashboards, analytics, BI
+- ML Engineer: SE --deploy--> ML systems
+
+## Energy tracking variables
+- codecarbon
+- 
 
 ## References
 1. https://github.com/se4ai2122-cs-uniba/SE4AI2021Course_FastAPI-demo
 2. 
-
