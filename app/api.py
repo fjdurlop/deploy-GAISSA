@@ -11,7 +11,8 @@ from fastapi import FastAPI, Request
 
 from app.schemas import IrisType, PredictPayload, PredictBert
 
-from transformers import pipeline
+from transformers import pipeline # Automodel, change to use pytorch
+
 
 
 MODELS_DIR = Path("models/")
@@ -175,7 +176,7 @@ def _predict_bert(request: Request, payload: PredictBert):
         # prediction = int(prediction[0])
         # predicted_type = IrisType(prediction).name
 
-        unmasker = pipeline('fill-mask', model='./bert-model')
+        unmasker = pipeline('fill-mask', model='./bert-base-uncased',framework = "pt") # tf
         output = unmasker(input_text)
         print(output)
         
