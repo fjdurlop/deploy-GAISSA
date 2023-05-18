@@ -32,6 +32,17 @@ class PredictBert(BaseModel):
             }
         }
 
+class PredictT5(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "translate English to German: Hello, how are you?",
+            }
+        }
+        
+
 class IrisType(Enum):
     setosa = 0
     versicolor = 1
