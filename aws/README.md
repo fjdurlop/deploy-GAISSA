@@ -8,3 +8,19 @@ You will receive an email
 
 ## setup budget
 https://aws.amazon.com/getting-started/hands-on/control-your-costs-free-tier-budgets/
+
+## Get an instance of EC2 server 
+https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier
+- select ubuntu
+
+## Deploying api
+- setenv
+- git clone this repo
+- run server
+
+
+## problems
+torch1.* has the problem with  low_cpu_mem_usage=True
+
+when ading low_cpu_mem_usage=True
+    RuntimeError: Tensor on device meta is not on the expected device cpu!
