@@ -36,13 +36,13 @@ from typing import Dict, List
 
 from fastapi import FastAPI, Request
 
-from app.schemas import IrisType, PredictPayload, PredictBert, PredictT5
+from app.schemas import IrisType, PredictPayload, PredictBert, PredictT5, PredictCNN
 print("point1")
 #from transformers import pipeline
 print("point2")
 
 # Local modules
-from app.models import LMBERTModel, Model, T5Model
+from app.models import LMBERTModel, Model, T5Model, CNNModel
 print("p3")
 
 MODELS_DIR = Path("models/")
@@ -217,7 +217,7 @@ def _predict_bert(request: Request, payload: PredictBert):
 
 @app.post("/huggingface_models/t5", tags=["Hugging Face Models"])
 @construct_response
-def _predict_bert(request: Request, payload: PredictT5):
+def _predict_t5(request: Request, payload: PredictT5):
     """T5 model."""
     
     input_text = payload.input_text 
@@ -249,6 +249,41 @@ def _predict_bert(request: Request, payload: PredictT5):
         }
     return response
 
+@app.post("/h5_models/cnn_fashion", tags=["H5 Models"])
+@construct_response
+def _predict_cnn(request: Request, payload: PredictCNN):
+    """CNN model."""
+    
+    input_text = payload.input_text 
+    print("Input text")
+    print(input_text)
+    #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+    model = CNNModel()
+    print(f"Model: {model.name}")
+
+    if input_text:
+        #prediction = model.predict(image)
+        prediction,is_correct = model.predict(input_text)
+        
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                #"model-type": model_wrapper["type"],
+                "model-type": model.name,
+                "input_text": input_text,
+                "prediction": prediction,
+                "is_correct": is_correct,
+                #"predicted_type": predicted_type,
+            },
+        }
+    else:
+        response = {
+            "message": "Model not found",
+            "status-code": HTTPStatus.BAD_REQUEST,
+        }
+    return response
 
 # @app.post("/huggingface_models/bert", tags=["Hugging Face Models"])
 # @construct_response

@@ -1,3 +1,9 @@
+import tensorflow as tf
+import tensorflow.keras as keras
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
 from transformers import BertTokenizer, BertForMaskedLM
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 from torch.nn import functional as F
@@ -80,3 +86,88 @@ class T5Model(Model):
             return tokenizer.decode(outputs[0], skip_special_tokens=True)
         
         return infer_t5(user_input)
+
+
+class CNNModel(Model):
+    """
+    Creates a LM Bert model. Inherits from Model()
+    """
+    def __init__(self):
+        super().__init__('CNN', 'image classification')
+        
+    def predict(self, user_input: str, n = 5):
+        dataset = "fashion"
+        label_names = {
+            0: "T-shirt/top",
+            1: "Trouser",
+            2: "Pullover",
+            3: "Dress",
+            4: "Coat",
+            5: "Sandal",
+            6: "Shirt",
+            7: "Sneaker",
+            8: "Bag",
+            9: "Ankle boot"
+        }
+
+        saved_model_dir = f"models/model_{dataset}.h5"
+
+        # Get test set 
+        fashion_mnist=keras.datasets.fashion_mnist
+        (_, _), (x_test, y_test) = fashion_mnist.load_data()
+
+        # load model
+        try:
+            print(saved_model_dir)
+            model = keras.models.load_model(saved_model_dir)
+            print("Model loaded correctly")
+        except:
+            print("There is a problem with the file path")
+            
+        def see_x_image(x,y,name=None,caption=True, save_dir="."):
+            '''
+            See image
+            '''
+            plt.figure()
+            
+            plt.imshow((x.reshape((28,28))).astype("uint8"))
+            title=str(y)
+            if name:
+                title += " "+name
+                plt.title(title)
+            if caption:
+                plt.title(title)
+            print(save_dir)
+            plt.savefig(save_dir+"/"+dataset+"_image"+ ".png")
+            plt.axis("off")
+        
+        if int(user_input) <= len(x_test):
+            ran = int(user_input)
+            print(" User entered ",user_input)
+        else:
+        # Get random number between 0 and len(x_test)
+            ran = random.randint(0, len(y_test))
+            print("Using random")
+        print(y_test[ran])
+        #print(list(y_test[ran]).index(max(y_test[ran])))
+        label_name = label_names[y_test[ran]]
+        see_x_image(x_test[ran],y_test[ran],label_name,save_dir="D:/GAISSA/deploy-GAISSA/app/")
+
+        # Inference
+        # predict with that random
+        x_test = x_test.reshape(-1, 28, 28, 1)
+        print(x_test[ran:ran+1].shape)
+        pred = tf.keras.utils.to_categorical(np.argmax(model.predict(x_test[ran:ran+1])), 10)
+        cat_pred = list(pred).index(max(pred))
+        label = f"{cat_pred} : {label_names[cat_pred]}"
+        is_correct = False
+        if y_test[ran] == cat_pred:
+            is_correct = True
+        
+        print("Prediction: ",pred, ", ",cat_pred)
+        print("Prediction clothes: ", label_names[cat_pred])
+        print("Correct label: ",y_test[ran])
+        print(f"is_correct: ", is_correct)
+            
+        
+        return label, is_correct
