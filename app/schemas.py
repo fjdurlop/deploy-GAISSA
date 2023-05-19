@@ -43,6 +43,17 @@ class PredictT5(BaseModel):
         }
         
 
+class PredictCNN(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "10",
+            }
+        }
+        
+
 class IrisType(Enum):
     setosa = 0
     versicolor = 1
