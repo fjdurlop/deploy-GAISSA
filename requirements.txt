@@ -4,6 +4,6 @@ requests==2.26.0
 scikit-learn==1.0.1
 transformers==4.28.1
 torch
-tensorflow==2.5.0
-tensorflow-cpu==2.5.0
-keras==2.6.0
+accelerate
+sentencepiece==0.1.*
+protobuf==3.20.*

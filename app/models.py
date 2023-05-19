@@ -1,4 +1,5 @@
 from transformers import BertTokenizer, BertForMaskedLM
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 from torch.nn import functional as F
 import torch
 
@@ -59,3 +60,23 @@ class LMBERTModel(Model):
         
         return list_results
     
+
+class T5Model(Model):
+    """
+    Creates a LM Bert model. Inherits from Model()
+    """
+    def __init__(self):
+        super().__init__('T5', 'Translation')
+        
+    def predict(self, user_input: str, n = 5):
+        #user_text = input('Enter text with [MASK]: ')
+        tokenizer = T5Tokenizer.from_pretrained("t5-small")
+        model = T5ForConditionalGeneration.from_pretrained("t5-small", low_cpu_mem_usage=True)
+
+        def infer_t5(text):
+            input_ids = tokenizer(text, return_tensors="pt").input_ids
+            outputs = model.generate(input_ids)
+
+            return tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        return infer_t5(user_input)
