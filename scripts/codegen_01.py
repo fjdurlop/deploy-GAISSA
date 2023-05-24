@@ -15,6 +15,7 @@ model = AutoModelForCausalLM.from_pretrained(checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 text = "def print_list(a):"
+text = "def get_random_element(dictionary):"
 
 completion = model.generate(**tokenizer(text, return_tensors="pt"))
 #completion = model.generate(**tokenizer(text, return_tensors="pt"),max_new_tokens =25)
