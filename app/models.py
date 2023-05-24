@@ -148,6 +148,7 @@ class CNNModel(Model):
         # Get random number between 0 and len(x_test)
             ran = random.randint(0, len(y_test))
             print("Using random")
+            print(ran)
         print(y_test[ran])
         #print(list(y_test[ran]).index(max(y_test[ran])))
         label_name = label_names[y_test[ran]]
