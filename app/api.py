@@ -36,13 +36,15 @@ from typing import Dict, List
 
 from fastapi import FastAPI, Request
 
-from app.schemas import IrisType, PredictPayload, PredictBert, PredictT5, PredictCNN
+from app.schemas import IrisType, PredictPayload, PredictBert, PredictT5, PredictCNN, PredictCodeGen, PredictPythia_70m, PredictCodet5p_220m
+
 print("point1")
 #from transformers import pipeline
 print("point2")
 
 # Local modules
-from app.models import LMBERTModel, Model, T5Model, CNNModel
+from app.models import LMBERTModel, Model, T5Model, CNNModel, CodeGenModel, Pythia_70mModel, Codet5p_220mModel
+
 print("p3")
 
 MODELS_DIR = Path("models/")
@@ -249,6 +251,114 @@ def _predict_t5(request: Request, payload: PredictT5):
         }
     return response
 
+
+@app.post("/huggingface_models/CodeGen", tags=["Hugging Face Models"])
+@construct_response
+def _predict_codegen(request: Request, payload: PredictCodeGen):
+    """CodeGen model."""
+    
+    input_text = payload.input_text 
+    print("Input text")
+    print(input_text)
+    #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+    model = CodeGenModel()
+    print(f"Model: {model.name}")
+
+    if input_text:
+        prediction = model.predict(input_text)
+        
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                #"model-type": model_wrapper["type"],
+                "model-type": model.name,
+                "input_text": input_text,
+                "prediction": prediction,
+                #"predicted_type": predicted_type,
+            },
+        }
+    else:
+        response = {
+            "message": "Model not found",
+            "status-code": HTTPStatus.BAD_REQUEST,
+        }
+    return response
+
+
+
+@app.post("/huggingface_models/Pythia_70m", tags=["Hugging Face Models"])
+@construct_response
+def _predict_pythia_70m(request: Request, payload: PredictPythia_70m):
+    """T5 model."""
+    
+    input_text = payload.input_text 
+    print("Input text")
+    print(input_text)
+    #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+    model = Pythia_70mModel()
+    print(f"Model: {model.name}")
+
+    if input_text:
+        prediction = model.predict(input_text)
+        
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                #"model-type": model_wrapper["type"],
+                "model-type": model.name,
+                "input_text": input_text,
+                "prediction": prediction,
+                #"predicted_type": predicted_type,
+            },
+        }
+    else:
+        response = {
+            "message": "Model not found",
+            "status-code": HTTPStatus.BAD_REQUEST,
+        }
+    return response
+
+CodeGenModel, Pythia_70mModel, Codet5p_220mModel
+
+@app.post("/huggingface_models/Codet5p_220m", tags=["Hugging Face Models"])
+@construct_response
+def _predict_codet5p_220m(request: Request, payload: PredictCodet5p_220m):
+    """Codet5p_220m model."""
+    
+    input_text = payload.input_text 
+    print("Input text")
+    print(input_text)
+    #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
+
+    model = Codet5p_220mModel()
+    print(f"Model: {model.name}")
+
+    if input_text:
+        prediction = model.predict(input_text)
+        
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                #"model-type": model_wrapper["type"],
+                "model-type": model.name,
+                "input_text": input_text,
+                "prediction": prediction,
+                #"predicted_type": predicted_type,
+            },
+        }
+    else:
+        response = {
+            "message": "Model not found",
+            "status-code": HTTPStatus.BAD_REQUEST,
+        }
+    return response
+
+
 @app.post("/h5_models/cnn_fashion", tags=["H5 Models"])
 @construct_response
 def _predict_cnn(request: Request, payload: PredictCNN):
@@ -264,7 +374,7 @@ def _predict_cnn(request: Request, payload: PredictCNN):
 
     if input_text:
         #prediction = model.predict(image)
-        prediction,is_correct = model.predict(input_text)
+        model_response = model.predict(input_text)
         
         response = {
             "message": HTTPStatus.OK.phrase,
@@ -273,8 +383,8 @@ def _predict_cnn(request: Request, payload: PredictCNN):
                 #"model-type": model_wrapper["type"],
                 "model-type": model.name,
                 "input_text": input_text,
-                "prediction": prediction,
-                "is_correct": is_correct,
+                "prediction": model_response['prediction'],
+                "is_correct": model_response['is_correct'],
                 #"predicted_type": predicted_type,
             },
         }

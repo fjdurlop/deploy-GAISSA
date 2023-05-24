@@ -1,34 +1,82 @@
+""" models
+
+This module defines the classes of each model used in the API.
+
+To add a new model:
+    1. Add Models_names
+    2. Add ML_task
+    3. Create new class:
+        def class NewModel(Model):
+    4. Create schema in schemas
+    5. Add endpoint in api
+    
+ToDo:
+- Add max_new_tokens parameter
+
+"""
+# External
+from enum import Enum
+
+# Required to run CNN model
 import tensorflow as tf
 import tensorflow.keras as keras
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+# ---
 
-from transformers import BertTokenizer, BertForMaskedLM
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 from torch.nn import functional as F
 import torch
+
+# [bert]
+from transformers import BertTokenizer, BertForMaskedLM
+# [t5, codet5p_220m]
+from transformers import T5Tokenizer, T5ForConditionalGeneration
+# [codegen]
+from transformers import AutoModelForCausalLM, AutoTokenizer
+# [pythia-70m]
+from transformers import GPTNeoXForCausalLM, AutoTokenizer
+
+from transformers import T5ForConditionalGeneration, AutoTokenizer
+
+class ML_task(Enum):
+    MLM = 1 # Masked Language Modeling
+    TRANSLATION = 2
+    CV = 3 # Computer Vision
+    CODE = 4
+    
+class models_names(Enum):
+    BERT = 1
+    T5 = 2
+    CodeGen = 3
+    CNN = 4
+    Pythia_70m = 5
+    Codet5p = 6
+    
 
 class Model:
     """
     Creates a default model
     """
-    def __init__(self, name = None, ml_task = None):
-        self.name = name
+    def __init__(self, model_name : models_names = None, ml_task : ML_task = None):
+        self.name = model_name.name
         # Masked Language Modeling - MLM
-        self.ml_task = ml_task
+        self.ml_task = ml_task.name
     
-    def predict(self, user_input):
+    def predict(self, user_input : str) -> dict:
         # Do prediction
         prediction = "Not defined yet "
-        return prediction
+        response = {
+            "prediction" : prediction
+        }
+        return response
     
 class LMBERTModel(Model):
     """
     Creates a LM Bert model. Inherits from Model()
     """
     def __init__(self):
-        super().__init__('BERT', 'MLM')
+        super().__init__(models_names.BERT, ML_task.MLM)
         
     def predict(self, user_input: str, n = 5):
         #user_text = input('Enter text with [MASK]: ')
@@ -64,15 +112,18 @@ class LMBERTModel(Model):
         for word in list_results:
             print(word)
         
-        return list_results
+        response = {
+            "prediction" : str(list_results)
+        }
+        return response
     
 
 class T5Model(Model):
     """
-    Creates a LM Bert model. Inherits from Model()
+    Creates a T5 model. Inherits from Model()
     """
     def __init__(self):
-        super().__init__('T5', 'Translation')
+        super().__init__(models_names.T5, models_names.T5)
         
     def predict(self, user_input: str, n = 5):
         #user_text = input('Enter text with [MASK]: ')
@@ -85,7 +136,105 @@ class T5Model(Model):
 
             return tokenizer.decode(outputs[0], skip_special_tokens=True)
         
-        return infer_t5(user_input)
+        response = {
+            "prediction" : infer_t5(user_input)
+        }
+        return response
+    
+class CodeGenModel(Model):
+    """_summary_ Creates a CodeGen model. Inherits from Model()
+
+    Args:
+        Model (_type_): _description_
+    """
+
+    def __init__(self):
+        super().__init__(models_names.CodeGen, ML_task.CODE)
+        
+    def predict(self, user_input: str):
+        
+        checkpoint = "Salesforce/codegen-350M-mono"
+
+        model = AutoModelForCausalLM.from_pretrained(checkpoint)
+
+        tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+
+        text = "def get_random_element(dictionary):"
+        text = user_input
+
+        completion = model.generate(**tokenizer(text, return_tensors="pt"))
+        #completion = model.generate(**tokenizer(text, return_tensors="pt"),max_new_tokens =25)
+        response = {
+            "prediction" : tokenizer.decode(completion[0]),
+        }
+        
+        return response
+    
+
+class Pythia_70mModel(Model):
+    """_summary_ Creates a Pythia model. Inherits from Model()
+
+    Args:
+        Model (_type_): _description_
+    """
+
+    def __init__(self):
+        super().__init__(models_names.Pythia_70m, ML_task.CODE)
+        
+    def predict(self, user_input: str):
+        
+        model = GPTNeoXForCausalLM.from_pretrained(
+        "EleutherAI/pythia-70m",
+        revision="step3000",
+        cache_dir="./pythia-70m/step3000",
+        )
+
+        tokenizer = AutoTokenizer.from_pretrained(
+        "EleutherAI/pythia-70m",
+        revision="step3000",
+        cache_dir="./pythia-70m/step3000",
+        )
+
+        text = "def get_random_element(dictionary):"
+        text = user_input
+        inputs = tokenizer(text, return_tensors="pt")
+        tokens = model.generate(**inputs)
+        response = {
+            "prediction" : tokenizer.decode(tokens[0]),
+        }
+        
+        return response
+
+
+class Codet5p_220mModel(Model):
+    """_summary_ Creates a Codet5p_220m model. Inherits from Model()
+
+    Args:
+        Model (_type_): _description_
+    """
+
+    def __init__(self):
+        super().__init__(models_names.Pythia_70m, ML_task.CODE)
+        
+    def predict(self, user_input: str):
+        
+        checkpoint = "Salesforce/codet5p-220m"
+        device = "cpu" # for GPU usage or "cpu" for CPU usage
+
+        tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+        model = T5ForConditionalGeneration.from_pretrained(checkpoint).to(device)
+
+        text = "def get_random_element(my_dictionary):<extra_id_0>"
+        text = user_input
+        inputs = tokenizer.encode(text, return_tensors="pt").to(device)
+        #outputs = model.generate(inputs, max_length=10,max_new_tokens = 30)
+        outputs = model.generate(inputs, max_new_tokens = 30)
+        prediction = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        response = {
+            "prediction" : prediction,
+        }
+        return response
+
 
 
 class CNNModel(Model):
@@ -93,7 +242,7 @@ class CNNModel(Model):
     Creates a LM Bert model. Inherits from Model()
     """
     def __init__(self):
-        super().__init__('CNN', 'image classification')
+        super().__init__(models_names.CNN, ML_task.CV)
         
     def predict(self, user_input: str, n = 5):
         dataset = "fashion"
@@ -149,10 +298,10 @@ class CNNModel(Model):
             ran = random.randint(0, len(y_test))
             print("Using random")
             print(ran)
-        print(y_test[ran])
+        print(f"label of selected input: {y_test[ran]}")
         #print(list(y_test[ran]).index(max(y_test[ran])))
         label_name = label_names[y_test[ran]]
-        see_x_image(x_test[ran],y_test[ran],label_name,save_dir="D:/GAISSA/deploy-GAISSA/app/")
+        see_x_image(x_test[ran],y_test[ran],label_name,save_dir="./")
 
         # Inference
         # predict with that random
@@ -170,5 +319,8 @@ class CNNModel(Model):
         print("Correct label: ",y_test[ran])
         print(f"is_correct: ", is_correct)
             
-        
-        return label, is_correct
+        response = {
+            "prediction": label,
+            "is_correct": is_correct,
+        }
+        return response
