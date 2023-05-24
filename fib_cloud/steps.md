@@ -94,7 +94,7 @@ ssh -L 8000:localhost:8000  alumne@10.4.41.62
 ## Steps
 - Open visual studio
 - Start server (uvicorn)
-  - uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir deploy-GAISSA --reload-dir app 
+  - uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir . --reload-dir app 
 - Ssh tunnel
 - Calls from local machine
 	• Open swagger
