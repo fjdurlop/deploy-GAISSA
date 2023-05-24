@@ -41,7 +41,40 @@ class PredictT5(BaseModel):
                 "input_text": "translate English to German: Hello, how are you?",
             }
         }
+
+
+class PredictCodeGen(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "def hello_world():",
+            }
+        }
+
+
+class PredictPythia_70m(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "def hello_world():",
+            }
+        }
         
+
+class PredictCodet5p_220m(BaseModel):
+    input_text: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "input_text": "def hello_world():<extra_id_0>",
+            }
+        }
+
 
 class PredictCNN(BaseModel):
     input_text: str
