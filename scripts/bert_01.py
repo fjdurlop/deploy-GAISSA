@@ -6,8 +6,6 @@ import torch
 
 low_cpu = True
 
-
-
 tokenizer = BertTokenizer.from_pretrained(pretrained_model_name_or_path = './bert-base-uncased')
 # bert model for masked language modelling
 model = None
