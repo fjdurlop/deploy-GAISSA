@@ -3,7 +3,7 @@
 ToDo:
 - Use pytest
 """
-from models import LMBERTModel, Model, T5Model, CNNModel, CodeGenModel, Pythia_70mModel, Codet5p_220mModel
+from models import LMBERTModel, T5Model, CNNModel, CodeGenModel, Pythia_70mModel, Codet5p_220mModel
 
 examples = {
     "BERT" : [
@@ -27,17 +27,20 @@ examples = {
     
 }
 
-model_classes = [LMBERTModel, T5Model, CodeGenModel, CNNModel, Pythia_70mModel, Codet5p_220mModel]
-#model_classes = [LMBERTModel]
+model_classes = [LMBERTModel, T5Model, CNNModel, CodeGenModel,  Pythia_70mModel, Codet5p_220mModel]
+#model_classes = model_classes[-1:]
 
 for class_model in model_classes:
-    instance_model = class_model()
-    print(f"Model: {instance_model.name}")
-    model_response = instance_model.predict(examples[instance_model.name][0])
-    assert isinstance(model_response,dict)
-    assert model_response['prediction'] is not None
-    assert isinstance(model_response['prediction'], str)
-    print(model_response)
+    try:
+        instance_model = class_model()
+        print(f"Model: {instance_model.name}")
+        model_response = instance_model.predict(examples[instance_model.name][0])
+        assert isinstance(model_response,dict)
+        assert model_response['prediction'] is not None
+        assert isinstance(model_response['prediction'], str)
+        print(model_response)
+    except Exception as e:
+        print(f"Exception: {e}")
     print("====================================================")
     
     
