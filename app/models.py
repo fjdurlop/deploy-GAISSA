@@ -51,7 +51,7 @@ class models_names(Enum):
     CodeGen = 3
     CNN = 4
     Pythia_70m = 5
-    Codet5p = 6
+    Codet5p_220m = 6
     
 
 class Model:
@@ -155,8 +155,7 @@ class CodeGenModel(Model):
         
         checkpoint = "Salesforce/codegen-350M-mono"
 
-        model = AutoModelForCausalLM.from_pretrained(checkpoint)
-
+        model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map = 'auto', torch_dtype = 'auto')
         tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
         text = "def get_random_element(dictionary):"
@@ -214,7 +213,7 @@ class Codet5p_220mModel(Model):
     """
 
     def __init__(self):
-        super().__init__(models_names.Pythia_70m, ML_task.CODE)
+        super().__init__(models_names.Codet5p_220m, ML_task.CODE)
         
     def predict(self, user_input: str):
         
@@ -222,7 +221,8 @@ class Codet5p_220mModel(Model):
         device = "cpu" # for GPU usage or "cpu" for CPU usage
 
         tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-        model = T5ForConditionalGeneration.from_pretrained(checkpoint).to(device)
+        # torch_dtype = 'auto' not implemented
+        model = T5ForConditionalGeneration.from_pretrained(checkpoint, device_map = 'auto')
 
         text = "def get_random_element(my_dictionary):<extra_id_0>"
         text = user_input
@@ -307,14 +307,18 @@ class CNNModel(Model):
         # predict with that random
         x_test = x_test.reshape(-1, 28, 28, 1)
         print(x_test[ran:ran+1].shape)
-        pred = tf.keras.utils.to_categorical(np.argmax(model.predict(x_test[ran:ran+1])), 10)
-        cat_pred = list(pred).index(max(pred))
+        model_predict = model.predict(x_test[ran:ran+1])
+        print(f"model_predict: {model_predict}")
+        cat_pred = np.argmax(model_predict)
+        print(f"argmax: {cat_pred}")
+        #pred = tf.keras.utils.to_categorical(np.argmax(model_predict), 10)
+        #cat_pred = list(pred).index(max(pred))
         label = f"{cat_pred} : {label_names[cat_pred]}"
         is_correct = False
         if y_test[ran] == cat_pred:
             is_correct = True
         
-        print("Prediction: ",pred, ", ",cat_pred)
+        print("Prediction: ",cat_pred)
         print("Prediction clothes: ", label_names[cat_pred])
         print("Correct label: ",y_test[ran])
         print(f"is_correct: ", is_correct)
