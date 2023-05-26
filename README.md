@@ -64,7 +64,7 @@ Guide (A self-contained manual for each task):
 - T5
   - https://huggingface.co/t5-base
 ### Computer Vision
-- CNN own model
+- CNN model
   - https://github.com/fjdurlop/guided-retraining/tree/main/models
 
 ### Code Generation
