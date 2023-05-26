@@ -43,7 +43,7 @@ condition that prevents bert model of using device_map
 https://github.com/huggingface/transformers/blob/main/src/transformers/modeling_utils.py#L2691
 
 
-By passing `device_map="auto"`, we tell 🤗 Accelerate to determine automatically where to put each layer of the model depending on the available resources:
+By passing `device_map="auto"`, we tell Accelerate to determine automatically where to put each layer of the model depending on the available resources:
 
 no_split_module_classes (`List[str]`):
 A list of class names for layers we don't want to be split.

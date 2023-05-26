@@ -38,14 +38,12 @@ from fastapi import FastAPI, Request
 
 from app.schemas import IrisType, PredictPayload, PredictBert, PredictT5, PredictCNN, PredictCodeGen, PredictPythia_70m, PredictCodet5p_220m
 
-print("point1")
 #from transformers import pipeline
-print("point2")
 
 # Local modules
 from app.models import LMBERTModel, Model, T5Model, CNNModel, CodeGenModel, Pythia_70mModel, Codet5p_220mModel
 
-print("p3")
+print("------------------------modules loaded!------------------------")
 
 MODELS_DIR = Path("models/")
 NAME_APP = "deploy-GAISSA"

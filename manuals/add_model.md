@@ -1,5 +1,15 @@
-Problems 
+- [Steps to load a model into the API](#steps-to-load-a-model-into-the-api)
+  - [Requirements](#requirements)
+  - [FAQ](#faq)
 
+# Steps to load a model into the API
+
+## Requirements
+
+## FAQ
+
+
+- Trying to use pipeline with old or small CPU/GPU: Illegal instruction (core dumped)
 >>> from transformers import pipeline
 >>> import tensorflow
 Illegal instruction (core dumped)

@@ -1,3 +1,15 @@
+# APP
+
+## API deployment
+## How to run API?
+
+## API creation
+- https://github.com/se4ai2122-cs-uniba/SE4AI2021Course_FastAPI-demo
+- 
+## How to add a new model?
+
+
+
 # Steps to create API
 Following the guide https://madewithml.com/courses/mlops/api/
 
