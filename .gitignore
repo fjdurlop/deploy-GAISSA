@@ -1,3 +1,8 @@
 scriptsenv/
 Lib/
+bert-base-uncased/
+pythia-70m/
+pythia-70m-deduped/
 .ipynb_checkpoints
+*.pyc
+*.cfg
