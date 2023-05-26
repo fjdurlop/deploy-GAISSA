@@ -26,7 +26,7 @@ The repository is structured as follows:
 
 Guide (A self-contained manual for each task):
 1. See manuals/api to check how to create an API
-2. See --- to check how to add a pretrained model from hugging face, h5 ... into API and inference
+2. See --- to check how to add a pretrained model from hugging face, h5 ... into an API and inference
 3. AWS setup, how to deploy a model in an AWS vm
 4. Azure setup, how to deploy a model in an Azure vm
 5. GCP setup, how to deploy a model in an GCP vm
@@ -76,6 +76,7 @@ Guide (A self-contained manual for each task):
   - https://huggingface.co/Salesforce/codet5p-220m
 
 ## API
+see manuals/01_create_api
 
 ### FastAPI
 
@@ -104,5 +105,12 @@ Role: ML Engineer
 
 ## Energy tracking variables
 - codecarbon
-- 
+- ...
 
+## Future work
+- Track energy efficiency.
+- Trade-off between green-AI related metrics and accuracy.
+- Monitor models' performance
+
+## References
+See manuals/references
