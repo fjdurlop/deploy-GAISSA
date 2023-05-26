@@ -25,12 +25,12 @@ The repository is structured as follows:
 </pre>
 
 Guide (A self-contained manual for each task):
-1. See manuals/api to check how to create an API
-2. See --- to check how to add a pretrained model from hugging face, h5 ... into an API and inference
-3. AWS setup, how to deploy a model in an AWS vm
-4. Azure setup, how to deploy a model in an Azure vm
-5. GCP setup, how to deploy a model in an GCP vm
-6. Virtech setup,how to deploy a model in an Virtech vm
+1. [API creation](manuals/01_create_api_steps.md). See manuals/api to check how to create an API.
+2. [Adding model](manuals/). See --- to check how to add a pretrained model from hugging face, h5 ... into an API and inference
+3. [AWS](manuals/). AWS setup, how to deploy a model in an AWS vm
+4. [Azure](manuals/). Azure setup, how to deploy a model in an Azure vm
+5. [GCP](manuals/). GCP setup, how to deploy a model in an GCP vm
+6. [Virtech](manuals/). Virtech setup,how to deploy a model in an Virtech vm
 
 ## Cloud providers*
 

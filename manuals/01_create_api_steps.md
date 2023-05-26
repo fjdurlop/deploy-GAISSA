@@ -78,7 +78,8 @@ We can now test that the application is working. These are some of the possibili
 
 - Use an external tool like [Postman](https://www.postman.com), which lets you execute and manage tests that can be saved and shared with others.
 
-Visit [localhost:5000/docs](http://localhost:5000/docs) and select one of the models.
+Visit [Swagger UI](http://localhost:5000/docs) for documentation endpoint and select one of the models. The documentation generated via [Redoc](https://github.com/Redocly/redoc) is accessible at the `/redoc` endpoint.
+
 
 <center><figure>
   <img
@@ -86,14 +87,14 @@ Visit [localhost:5000/docs](http://localhost:5000/docs) and select one of the mo
   <figcaption>API User Interface in localhost:5000/docs endpoint.</figcaption>
 </figure></center>
 
-To make an inference, click on "Try it out" button and click execute.
+To make an inference, click on the "Try it out" button and click execute.
 
 You should obtain a "200" code response after executing the POST method of the model:
 
 <center><figure>
   <img
   src="images/01_api_response_ui.png"
-  <figcaption>API response on UI.</figcaption>
+  <figcaption>API response on Swagger UI.</figcaption>
 </figure></center>
 
 <center><figure>
