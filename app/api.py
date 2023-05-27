@@ -320,7 +320,6 @@ def _predict_pythia_70m(request: Request, payload: PredictPythia_70m):
         }
     return response
 
-CodeGenModel, Pythia_70mModel, Codet5p_220mModel
 
 @app.post("/huggingface_models/Codet5p_220m", tags=["Hugging Face Models"])
 @construct_response
@@ -392,52 +391,3 @@ def _predict_cnn(request: Request, payload: PredictCNN):
             "status-code": HTTPStatus.BAD_REQUEST,
         }
     return response
-
-# @app.post("/huggingface_models/bert", tags=["Hugging Face Models"])
-# @construct_response
-# def _predict_bert(request: Request, payload: PredictBert):
-#     """bert-base-uncased model."""
-
-#     # sklearn's `predict()` methods expect a 2D array of shape [n_samples, n_features]
-#     # therefore, we need to convert our single data point into a 2D array
-#     # features = [
-#     #     [
-#     #         payload.sepal_length,
-#     #         payload.sepal_width,
-#     #         payload.petal_length,
-#     #         payload.petal_width,
-#     #     ]
-#     # ]
-    
-#     input_text = payload.input_text 
-#     print("Input text")
-#     print(input_text)
-#     #model_wrapper = next((m for m in model_wrappers_list if m["type"] == type), None)
-
-#     if input_text:
-
-#         # prediction = model_wrapper["model"].predict(features)
-#         # prediction = int(prediction[0])
-#         # predicted_type = IrisType(prediction).name
-
-#         unmasker = pipeline('fill-mask', model='./bert-base-uncased')
-#         output = unmasker(input_text)
-#         print(output)
-        
-#         response = {
-#             "message": HTTPStatus.OK.phrase,
-#             "status-code": HTTPStatus.OK,
-#             "data": {
-#                 #"model-type": model_wrapper["type"],
-#                 "model-type": "BERT",
-#                 "input_text": input_text,
-#                 "prediction": output,
-#                 #"predicted_type": predicted_type,
-#             },
-#         }
-#     else:
-#         response = {
-#             "message": "Model not found",
-#             "status-code": HTTPStatus.BAD_REQUEST,
-#         }
-#     return response
