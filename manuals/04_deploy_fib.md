@@ -1,3 +1,36 @@
+## Get VM
+Follow the documentation from https://www.fib.upc.edu/es/la-fib/servicios-tic/cloud-docente-fib.
+
+## Connect to the VM from local machine
+Type ifconfig to get ip of your VM
+
+![](images/virtech_ifconfig.png)
+
+In your local machine you can connect through ssh:
+![](images/virtech_ssh.png)
+
+
+## Step 3: Clone the Repository
+
+See Step 3 in [03_deploy_general.md](03_deploy_general.md)
+
+## Step 4: Set Up the Environment
+See Step 4 in [03_deploy_general.md](03_deploy_general.md)
+
+## Step 5: Run the API
+See Step 5 in [03_deploy_general.md](03_deploy_general.md)
+
+## Step 6: Access the API
+
+   Create a ssh tunnel to port XXXX on the remote system which you can access on your local machine at "localhost:XXXX"
+
+
+    Open a web browser or use a tool like cURL or Postman to make HTTP requests to the API endpoints.
+
+    Send requests to the API with the required input data and parameters to obtain predictions or perform the desired operations.
+
+
+
 ## Files
 - setenv.sh
   - Set environment in bash terminal before installing requirements.txt

@@ -42,7 +42,6 @@ class PredictT5(BaseModel):
             }
         }
 
-
 class PredictCodeGen(BaseModel):
     input_text: str
 
@@ -53,7 +52,6 @@ class PredictCodeGen(BaseModel):
             }
         }
 
-
 class PredictPythia_70m(BaseModel):
     input_text: str
 
@@ -63,7 +61,6 @@ class PredictPythia_70m(BaseModel):
                 "input_text": "def hello_world():",
             }
         }
-        
 
 class PredictCodet5p_220m(BaseModel):
     input_text: str
@@ -75,7 +72,6 @@ class PredictCodet5p_220m(BaseModel):
             }
         }
 
-
 class PredictCNN(BaseModel):
     input_text: str
 
@@ -85,7 +81,6 @@ class PredictCNN(BaseModel):
                 "input_text": "10",
             }
         }
-        
 
 class IrisType(Enum):
     setosa = 0

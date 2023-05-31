@@ -24,13 +24,16 @@ The repository is structured as follows:
 - requirements.txt: The dependencies of our implementation
 </pre>
 
-Guide (A self-contained manual for each task):
-1. [API creation](manuals/01_create_api_steps.md). See manuals/api to check how to create an API.
-2. [Adding model](manuals/). See --- to check how to add a pretrained model from hugging face, h5 ... into an API and inference
-3. [AWS](manuals/). AWS setup, how to deploy a model in an AWS vm
-4. [Azure](manuals/). Azure setup, how to deploy a model in an Azure vm
-5. [GCP](manuals/). GCP setup, how to deploy a model in an GCP vm
-6. [Virtech](manuals/). Virtech setup,how to deploy a model in an Virtech vm
+Guide:
+1. [API creation](manuals/01_create_api.md). Guide to create an API to deploy ML models.
+2. [Add pretrained model](manuals/02_add_models.md). (ToDo) Guide to add pretrained ML models (from HuggingFace, hdf5 format, pickle format) to do inferences through an API.
+3. [Deploy ML models in a cloud provider (General)](manuals/03_deploy_general.md). Guide to deploy ML models using an API in a cloud provider.
+4. [Deploy in Virtech](manuals/04_deploy_fib.md). Virtech setup, Guide to deploy ML models using an API in an AWS VM.
+5. [AWS](manuals/05_deploy_aws.md). AWS setup, Guide to deploy ML models using an API in an AWS VM.
+7. [GCP](manuals/06_deploy_gcp.md). GCP setup, Guide to deploy ML models using an API in an GCP VM.
+8. [Azure](manuals/). (ToDo) Azure setup, Guide to deploy ML models using an API in an Azure VM.
+9. [FAQ](manuals/FAQ.md). (ToDo) Documentation with problems arised during deployments.
+
 
 ## Cloud providers*
 
@@ -42,7 +45,7 @@ Guide (A self-contained manual for each task):
 - Azure Virtual Machines from Microsoft Windows Azure
   | URL: https://azure.microsoft.com/
 - Google Compute Engine from Google Cloud Platform (GCP)
-  | URL: http://www.cs.toronto.edu/~kriz/cifar.html
+  | URL: https://cloud.google.com/
 - Virtech, UPC cloud provider (By OpenNebula)
   | URL: https://www.fib.upc.edu/es/la-fib/servicios-tic/cloud-docente-fib
   | URL: https://opennebula.io/

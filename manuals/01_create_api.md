@@ -1,15 +1,10 @@
-**ToDo:**
-- 
-- [x] Fix images
-- [x] Continue ## How to add a new model?
+# API: creation and deployment
 
-# API - creation and deployment
-
-- [API - creation and deployment](#api---creation-and-deployment)
+- [API: creation and deployment](#api-creation-and-deployment)
   - [API setup](#api-setup)
-  - [How to run API?](#how-to-run-api)
+  - [How to run the API?](#how-to-run-the-api)
   - [API creation](#api-creation)
-  - [How to add a new model?](#how-to-add-a-new-model)
+  - [How to add a new model in our API?](#how-to-add-a-new-model-in-our-api)
 
 
 ## API setup
@@ -20,7 +15,7 @@ Install all project requirements with `pip`:
 pip install -r requirements.txt
 ```
 
-## How to run API?
+## How to run the API?
 
 We'll be using Uvicorn, a fast ASGI server (it can run asynchronous code in a single process) to launch our application. Use the following command to start the server:
 
@@ -33,7 +28,7 @@ uvicorn app.api:app \
     --reload-dir models
 ```
 Or
-```
+```bash
 uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir deploy-GAISSA --reload-dir app 
 ```
 In detail:
@@ -43,7 +38,6 @@ In detail:
 - `--reload-dir app` makes it only reload on updates to the `app/` directory;
 - `--reload-dir models` makes it also reload on updates to the `models/` directory;
 
-**Observation**. If we want to manage multiple `uvicorn` workers to enable parallelism in our application, we can use **Gunicorn** in conjunction with **Uvicorn**.
 
 <center><figure>
   <img
@@ -75,7 +69,7 @@ We can now test that the application is working. These are some of the possibili
 
 - Use an external tool like [Postman](https://www.postman.com), which lets you execute and manage tests that can be saved and shared with others.
 
-Visit [Swagger UI](http://localhost:5000/docs) for documentation endpoint and select one of the models. The documentation generated via [Redoc](https://github.com/Redocly/redoc) is accessible at the `/redoc` endpoint.
+Visit [Swagger UI](http://localhost:5000/docs) in http://localhost:5000/docs for documentation endpoint and select one of the models. The documentation generated via [Redoc](https://github.com/Redocly/redoc) is accessible at the `/redoc` endpoint.
 
 
 <center><figure>
@@ -106,19 +100,18 @@ You should obtain a "200" code response after executing the POST method of the m
 ## API creation
 The API in this project is freely inspired by the [Made with ML](https://madewithml.com) tutorial: "[APIs for Machine Learning](https://madewithml.com/courses/mlops/api/)" and [FastAPI Lab](https://github.com/se4ai2122-cs-uniba/SE4AI2021Course_FastAPI-demo).
 
-Following the guide https://madewithml.com/courses/mlops/api/
+Follow the guide https://madewithml.com/courses/mlops/api/
 
-## How to add a new model?
-``
-1. Add new model.
+## How to add a new model in our API?
+
+1. Add new model class.
    File: [../app/models.py](../app/models.py)
    - Add a new class according to your new model, parent class is `Model()`.
    - Make sure `NewModel.predict()` method is implemented according to the model.
    - Add ML_task
-
-2. Create schema.
+2. Create a model schema.
    File: [../app/schemas.py](../app/schemas.py)
    - Create a schema with one example.
 3. Add endpoint.
    File: [../app/api.py](../app/api.py)
-   - According to the new model information (Model class and schema), add the endpoint to enable POST requests and make inference using the model.
+   - According to the new model information (Model Class and schema), add the endpoint to enable POST requests and make predictions using the model.
