@@ -18,7 +18,7 @@ ToDo:
 from enum import Enum
 
 # Required to run CNN model
-import tensorflow as tf
+#import tensorflow as tf
 import tensorflow.keras as keras
 import numpy as np
 import matplotlib.pyplot as plt
@@ -70,7 +70,8 @@ class Model:
             "prediction" : prediction
         }
         return response
-    
+
+
 class LMBERTModel(Model):
     """
     Creates a LM Bert model. Inherits from Model()
@@ -140,7 +141,8 @@ class T5Model(Model):
             "prediction" : infer_t5(user_input)
         }
         return response
-    
+
+
 class CodeGenModel(Model):
     """_summary_ Creates a CodeGen model. Inherits from Model()
 
@@ -236,7 +238,6 @@ class Codet5p_220mModel(Model):
         return response
 
 
-
 class CNNModel(Model):
     """
     Creates a LM Bert model. Inherits from Model()
@@ -311,8 +312,7 @@ class CNNModel(Model):
         print(f"model_predict: {model_predict}")
         cat_pred = np.argmax(model_predict)
         print(f"argmax: {cat_pred}")
-        #pred = tf.keras.utils.to_categorical(np.argmax(model_predict), 10)
-        #cat_pred = list(pred).index(max(pred))
+
         label = f"{cat_pred} : {label_names[cat_pred]}"
         is_correct = False
         if y_test[ran] == cat_pred:

@@ -2,6 +2,9 @@
 
 ToDo:
 - Use pytest
+- Test Cases
+    - Each model must have predict method and return a dictionary
+    - Generation models should return longer text
 """
 from models import LMBERTModel, T5Model, CNNModel, CodeGenModel, Pythia_70mModel, Codet5p_220mModel
 
