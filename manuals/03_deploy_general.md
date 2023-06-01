@@ -1,6 +1,6 @@
 **ToDo:**
 
-- [ ] 
+- [x] 
 
 -------------------
 # Guide to Deploy ML Models through an API on a Cloud Provider

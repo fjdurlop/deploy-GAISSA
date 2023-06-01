@@ -26,13 +26,14 @@ The repository is structured as follows:
 
 Guide:
 1. [API creation](manuals/01_create_api.md). Guide to create an API to deploy ML models.
-2. [Add pretrained model](manuals/02_add_models.md). (ToDo) Guide to add pretrained ML models (from HuggingFace, hdf5 format, pickle format) to do inferences through an API.
+2. [Add pretrained model](manuals/02_add_models.md). Guide to add pretrained ML models (from HuggingFace, hdf5 format, pickle format) to do inferences through an API.
 3. [Deploy ML models in a cloud provider (General)](manuals/03_deploy_general.md). Guide to deploy ML models using an API in a cloud provider.
 4. [Deploy in Virtech](manuals/04_deploy_fib.md). Virtech setup, Guide to deploy ML models using an API in an AWS VM.
 5. [AWS](manuals/05_deploy_aws.md). AWS setup, Guide to deploy ML models using an API in an AWS VM.
-7. [GCP](manuals/06_deploy_gcp.md). GCP setup, Guide to deploy ML models using an API in an GCP VM.
-8. [Azure](manuals/). (ToDo) Azure setup, Guide to deploy ML models using an API in an Azure VM.
-9. [FAQ](manuals/FAQ.md). (ToDo) Documentation with problems arised during deployments.
+6. [GCP](manuals/06_deploy_gcp.md). GCP setup, Guide to deploy ML models using an API in an GCP VM.
+7. [Azure](manuals/). (ToDo) Azure setup, Guide to deploy ML models using an API in an Azure VM.
+8. [FAQ](manuals/FAQ.md). Documentation with problems arised during deployments.
+9. [Other](manuals/other.md). Other notes.
 
 
 ## Cloud providers*
@@ -60,6 +61,12 @@ Guide:
 ## Models*
 \* Initial proposed models
 
+- BERT model
+- T5
+- CodeGen
+- Pythia-70m
+- CNN model
+- Codet5p-220m
 ### Text Generation
 - BERT
   - https://huggingface.co/bert-base-uncased
@@ -79,7 +86,7 @@ Guide:
   - https://huggingface.co/Salesforce/codet5p-220m
 
 ## API
-see manuals/01_create_api
+See [manuals/01_create_api.md](manuals/01_create_api.md) to check how to create an API to deploy ML models.
 
 ### FastAPI
 
@@ -106,7 +113,7 @@ Role: ML Engineer
 - BI: Dashboards, analytics, BI
 - ML Engineer: SE --deploy--> ML systems
 
-## Energy tracking variables
+## Energy tracking metrics
 - codecarbon
 - ...
 
@@ -117,3 +124,12 @@ Role: ML Engineer
 
 ## References
 See manuals/references
+
+-------------------
+
+**ToDo:**
+
+- [ ] Add info cloud providers
+- [ ] Add FastAPI info
+
+-------------------

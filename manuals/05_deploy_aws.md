@@ -1,11 +1,11 @@
 **ToDo:**
 
-- [ ] 
+- [x] 
 
 -------------------
 # AWS setup: How to deploy ML models in a AWS VM?
 
-1. Get a  [free AWS account](https://aws.amazon.com/free):
+1. **Get a  [free AWS account](https://aws.amazon.com/free):**
 
 <center><figure>
   <img
@@ -22,7 +22,7 @@
 2. **Sign in to AWS Console.** 
    - Go to the AWS Management Console (https://console.aws.amazon.com/) and sign in with your AWS account credentials. Sign up if you do not have an account.
 
-3. Setup budget.
+3. **Setup budget.**
    - https://aws.amazon.com/getting-started/hands-on/control-your-costs-free-tier-budgets/
 
 4. **Navigate to EC2 Service.** 
@@ -61,12 +61,14 @@
 </figure></center>
 <p style="text-align: center;">Configure storage.</p>
 
-10.  **Create a Key Pair:** In the key pair selection page, choose to either create a new key pair or use an existing one. If creating a new key pair, follow the instructions to download the private key file (.pem). This key pair is required to connect to your instance via SSH.
+10.  **Create a Key Pair.** 
+     - In the key pair selection page, choose to either create a new key pair or use an existing one. If creating a new key pair, follow the instructions to download the private key file (.pem). This key pair is required to connect to your instance via SSH.
 
 11.  **Review and Launch.** 
      - Review all the settings you have configured for your instance. Double-check if everything looks correct, and then click on the "Launch" button to proceed.
 
-12. Wait for the virtual machine to be provisioned. Once it is ready, you can find its details on the EC2>Instances dashboard, including its public IP.
+12. **Wait for the virtual machine to be provisioned.**
+    - Once it is ready, you can find its details on the EC2>Instances dashboard, including its public IP.
 
 13.  **Access your Instance via SSH.** 
      - Once the instances are launched, you can connect to them using SSH. Open your terminal or SSH client and use the downloaded private key file to establish an SSH connection to your instance. The command typically looks like this:
@@ -77,9 +79,9 @@
      - Replace /path/to/private_key.pem with the actual path to your private key file, username with the appropriate username (depending on the chosen AMI), and public_ip with the public DNS name or IP address of your instance.
      - See also [Step 3](03_deploy_general.md)
 
-14. Clone repository. See [Step 4](03_deploy_general.md)
-15. Set Up the Environment. See [Step 5](03_deploy_general.md)
-16. Run the API. See [Step 6](03_deploy_general.md)
-17. Access the API. See [Step 7](03_deploy_general.md)  
+14. **Clone repository. See [03_deploy_general.md: Step 4](03_deploy_general.md)**
+15. **Set Up the Environment. See [03_deploy_general.md: Step 5](03_deploy_general.md)**
+16. **Run the API. See [03_deploy_general.md: Step 6](03_deploy_general.md)**
+17. **Access the API. See [03_deploy_general.md: Step 7](03_deploy_general.md)**  
 
 
