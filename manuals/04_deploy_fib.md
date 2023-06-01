@@ -1,6 +1,6 @@
 **ToDo:**
 
-- [ ] 
+- [x] 
 
 -------------------
 # Private cloud Virtech setup: How to deploy ML models in a private cloud VM (Virtech)?
@@ -28,7 +28,7 @@
 </figure></center>
 <p style="text-align: center;">SSH connection.</p>
 
-3.  Clone repository. See [Step 4](03_deploy_general.md)
-4.  Set Up the Environment. See [Step 5](03_deploy_general.md)
-5.   Run the API. See [Step 6](03_deploy_general.md)
-6.   Access the API. See [Step 7](03_deploy_general.md)  
+3.  Clone repository. See [03_deploy_general.md: Step 4](03_deploy_general.md)
+4.  Set Up the Environment. See [03_deploy_general.md: Step 5](03_deploy_general.md)
+5.   Run the API. See [03_deploy_general.md: Step 6](03_deploy_general.md)
+6.   Access the API. See [03_deploy_general.md: Step 7](03_deploy_general.md)  

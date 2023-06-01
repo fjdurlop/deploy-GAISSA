@@ -1,6 +1,6 @@
 **ToDo:**
 
-- [ ] 
+- [x] 
 
 -------------------
 # API: creation and deployment
@@ -9,7 +9,7 @@
   - [API setup](#api-setup)
   - [How to run the API?](#how-to-run-the-api)
   - [API creation](#api-creation)
-  - [How to add a new model in our API?](#how-to-add-a-new-model-in-our-api)
+  - [How to add a new model in this API?](#how-to-add-a-new-model-in-this-api)
 
 
 ## API setup
@@ -107,7 +107,7 @@ The API in this project is freely inspired by the [Made with ML](https://madewit
 
 Follow the guide https://madewithml.com/courses/mlops/api/
 
-## How to add a new model in our API?
+## How to add a new model in this API?
 
 1. Add new model class.
    File: [../app/models.py](../app/models.py)

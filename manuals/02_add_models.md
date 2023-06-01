@@ -2,7 +2,7 @@
 
 - [x] Add images
 - [x] Info
-- [ ] Update references to this file
+- [x] Update references to this file
 - [x] HuggingFace
 - [x] hdf5
 
