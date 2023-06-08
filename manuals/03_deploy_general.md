@@ -46,9 +46,15 @@ git clone https://github.com/fjdurlop/deploy-GAISSA.git
 ## Step 5: Set Up the Environment
 
 1. Install the necessary dependencies and packages required for running the API. 
-    
+
 ```shell
-pip install -r requirements.txt
+. ./scripts/setenv.sh
+```
+
+```shell
+
+python3 -m pip install -r requirements.txt
+
 ```
 
 ## Step 6: Run the API
@@ -64,6 +70,10 @@ pip install -r requirements.txt
         --reload \
         --reload-dir app \
         --reload-dir models
+    ```
+    Or
+    ```bash
+    uvicorn app.api:app  --host 0.0.0.0 --port 8000  --reload  --reload-dir deploy-GAISSA --reload-dir app 
     ```
 3. Create SSH tunnel to access endpoints, forwards traffic from my local port XXXX to the remote server's port XXXX
     ```bash
