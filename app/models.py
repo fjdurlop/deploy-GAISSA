@@ -82,9 +82,9 @@ class LMBERTModel(Model):
     def predict(self, user_input: str, n = 5):
         #user_text = input('Enter text with [MASK]: ')
         user_text = user_input
-        tokenizer = BertTokenizer.from_pretrained(pretrained_model_name_or_path = './bert-base-uncased')
+        tokenizer = BertTokenizer.from_pretrained(pretrained_model_name_or_path = 'bert-base-uncased') # ./bert-base-uncased
         # bert model for masked language modelling
-        model = BertForMaskedLM.from_pretrained(pretrained_model_name_or_path = './bert-base-uncased',    return_dict = True)
+        model = BertForMaskedLM.from_pretrained(pretrained_model_name_or_path = 'bert-base-uncased',    return_dict = True) # ./bert-base-uncased
         # return_dict True to use mask token
         text = user_text
         input_token = tokenizer.encode_plus(text, return_tensors = "pt")

@@ -106,6 +106,9 @@ computation especially for vector operations. Starting from TensorFlow 1.6, pre-
     - check system information, then search {cpu model} CPU features
   - Linux
     - `more /proc/cpuinfo | grep flags`
+- See accelerators
+  - https://www.intel.com/content/www/us/en/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html
+  - cat /proc/cpuinfo
 
 --------------------
 ## Not enough disk space
