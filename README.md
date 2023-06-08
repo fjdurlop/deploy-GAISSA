@@ -31,7 +31,7 @@ Guide:
 4. [Deploy in Virtech](manuals/04_deploy_fib.md). Virtech setup, Guide to deploy ML models using an API in an AWS VM.
 5. [AWS](manuals/05_deploy_aws.md). AWS setup, Guide to deploy ML models using an API in an AWS VM.
 6. [GCP](manuals/06_deploy_gcp.md). GCP setup, Guide to deploy ML models using an API in an GCP VM.
-7. [Azure](manuals/). (ToDo) Azure setup, Guide to deploy ML models using an API in an Azure VM.
+7. [Azure](manuals/07_deploy_azure.md). Azure setup, Guide to deploy ML models using an API in an Azure VM.
 8. [FAQ](manuals/FAQ.md). Documentation with problems arised during deployments.
 9. [Other](manuals/other.md). Other notes.
 
@@ -53,9 +53,9 @@ Guide:
 </pre>
 
 ### Amazon EC2
-### Azure Virtual Machines
 ### Google Compute Engine
 ### Virtech, UPC cloud provider
+### Azure Virtual Machines
 
 
 ## Models*
