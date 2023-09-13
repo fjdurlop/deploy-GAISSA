@@ -2,7 +2,7 @@ name: deploy-gaissa
 services:
   deploy-api:
     public: true
-    image: GAISSA-UPC/cloud-api:latest
+    image: fjdurlop/deploy-GAISSA:latest
     build: .
     replicas: 1
     ports:
