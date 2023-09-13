@@ -1,0 +1,12 @@
+name: deploy-gaissa
+services:
+  textgen:
+    public: true
+    image: GAISSA-UPC/cloud-api:latest
+    build: .
+    replicas: 1
+    ports:
+      - 8080
+    resources:
+      cpu: 1000m
+      memory: 3Gi
