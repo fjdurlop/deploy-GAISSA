@@ -7,5 +7,6 @@ torch
 accelerate
 sentencepiece==0.1.*
 protobuf==3.20.*
-uvloop>=0.14.0
 httptools==0.1.*
+numpy
+matplotlib
